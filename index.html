@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="imgs/png/16x16.png">
+    <style>
+body {
+    width: 100%;
+    max-width: 640px;
+    margin: auto;
+    color: #333;
+    text-align: justify;
+    font-family: serif;
+    line-height: 1.5;
+
+    --grey1: hsl(240, 2.3%, 83.1%);
+}
+
+h1, h2, h3, h4 {
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+pre {
+    overflow-x: auto;
+    background-color: var(--grey1);
+    border-radius: 3px;
+}
+
+pre code {
+    display: inline-block;
+    padding: 10px;
+}
+
+code {
+    background-color: var(--grey1);
+    border-radius: 3px;
+    padding: 1px 5px;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code {
+    background: none;
+    padding: 0;
+}
+
+.logo {
+    width: 128px;
+    height: 128px;
+    margin: auto;
+    display: block;
+}
+
+    </style>
+    <title>jsoncomma</title>
+</head>
+<body>
+    <h1>jsoncomma</h1>
+
+    <p>
+        <code>jsoncomma</code> is a simple utility which manages the commas in your JSON-like files. It adds needed ones, and removes the others.
+    </p>
+
+    <h2 id='official-plugins'>Official plugins</h2>
+
+    <p>You'll need to download the plugin for you favorite editor.</p>
+
+    <ul>
+        <li>Sublime Text, available on <a href="https://packagecontrol.io/packages/JSONComma">Package Control</a></li>
+        <li><i>Don't see your favorite editor here? <a href="https://jsoncomma.github.io/jsoncomma/">It's very easy to develop a plugin for it!</a></i></li>
+    </ul>
+
+    <h2 id='install'>Installing the binary yourself</h2>
+
+    <p>You will first need to install <code>jsoncomma</code>, the program which fixes whatever JSON-like payload you give it. </p>
+
+    <h3>Standalone binary</h3>
+
+    <p>You can download the standalone binary for your platform from the <a href="https://github.com/jsoncomma/jsoncomma/releases">release page on GitHub</a>. This is normally done automatically by your editor's plugin.</p>
+
+    <h3 id='build-from-source'>Build from source</h3>
+
+    <pre><code>$ go get github.com/jsoncomma/jsoncomma</code></pre>
+
+
+    <h2 id='using-as-a-cli'>Using as a CLI</h2>
+
+    <p><em>I struggle to see a common use case for using <code>jsoncomma</code> from the terminal like this. Hence, it is not nearly as optimized as the web server which editors plugins use. It's still really fast, but in terms of memory usage, it won't perform as well as the web server.</em></p>
+
+    <pre><code>$ cat > myfile.json
+{
+    // my json file
+    "setting": "value"
+
+    "sneaky": "yep, that works [\"just\" fine, ]"
+
+    // it's good
+    "still though": "?", // trailing commas
+}
+$ <strong>jsoncomma myfile.json</strong>
+$ cat myfile.json
+{
+    // my json file
+    "setting": "value",
+
+    "sneaky": "yep, that works [\"just\" fine, ]",
+
+    // it's good
+    "still though": "?"
+}
+$ echo '{"some json": "to" "fix": [1 2 3,]}' | <strong>jsoncomma</strong>
+{"some json": "to", "fix": [1, 2, 3]}
+</code></pre>
+
+    <p style="text-align: center;">Happy not worrying about commas anymore!</p>
+    <img src="imgs/jsoncomma.svg" class="logo">
+
+</body>
+</html>
